@@ -56,12 +56,12 @@ const initializeRedis = async () => {
 };
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const startServer = async () => {
   await connectDB();
   await initializeRedis();
   
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
   });
 };
