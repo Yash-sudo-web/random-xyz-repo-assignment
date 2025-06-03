@@ -1,4 +1,4 @@
-name: Deploy to Azure VM
+name: Deploy to EC2
 
 on:
   push:
@@ -26,4 +26,5 @@ jobs:
             cd ${{ secrets.APP_DIR }}
             git pull origin main
             npm install
-            pm2 restart all || pm2 start app.ts --name my-app
+            npm run build
+            pm2 restart my-app || pm2 start dist/app.js --name my-app
