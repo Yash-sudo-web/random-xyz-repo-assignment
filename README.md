@@ -8,8 +8,13 @@ A RESTful API backend for managing chapter performance data with features like f
 - MongoDB for data persistence
 - Redis for caching and rate limiting
 - TypeScript for type safety
+- Express.js framework
+- JWT authentication
 - Input validation and error handling
-- API documentation with Postman collection
+- CORS enabled
+- Security with Helmet middleware
+- File upload support with Multer
+- Morgan for HTTP request logging
 
 ## Prerequisites
 
@@ -17,12 +22,25 @@ A RESTful API backend for managing chapter performance data with features like f
 - MongoDB
 - Redis
 
+## Tech Stack
+
+- TypeScript
+- Express.js
+- MongoDB with Mongoose
+- Redis
+- JWT for authentication
+- Express Rate Limit
+- Multer for file handling
+- Morgan for logging
+- CORS
+- Helmet for security
+
 ## Installation
 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd <repository-name>
+cd mathongo-backend-assignment
 ```
 
 2. Install dependencies:
@@ -38,67 +56,62 @@ MONGODB_URI=mongodb://localhost:27017/chapter-dashboard
 REDIS_HOST=localhost
 REDIS_PORT=6379
 REDIS_PASSWORD=
+JWT_SECRET=your_jwt_secret
 ```
 
 ## Running the Application
 
-### Development
+### Development Mode
 ```bash
 npm run dev
 ```
 
-### Production
+### Production Mode
 ```bash
 npm run build
 npm start
 ```
 
-## API Endpoints
-
-### GET /api/v1/chapters
-Get all chapters with optional filters:
-- class
-- unit
-- status
-- weakChapters
-- subject
-- page (default: 1)
-- limit (default: 10)
-
-### GET /api/v1/chapters/:id
-Get a specific chapter by ID
-
-### POST /api/v1/chapters
-Upload chapters from a JSON file
-
-## Rate Limiting
-
-The API is rate-limited to 30 requests per minute per IP address using Redis.
-
-## Caching
-
-GET requests to /api/v1/chapters are cached for 1 hour using Redis. The cache is automatically invalidated when new chapters are added.
-
-## Error Handling
-
-The API returns appropriate HTTP status codes and error messages in the following format:
-```json
-{
-  "success": false,
-  "message": "Error message",
-  "error": "Detailed error message (only in development)"
-}
+### Linting
+```bash
+npm run lint
 ```
 
-## Success Response Format
+## Project Structure
 
-```json
-{
-  "success": true,
-  "data": {
-    // Response data
-  }
-}
+```
+src/
+├── controllers/    # Request handlers
+├── models/        # Database models
+├── routes/        # API routes
+├── middleware/    # Custom middleware
+├── utils/         # Utility functions
+└── app.ts         # Application entry point
+```
+
+## API Documentation
+
+[Postman API Documentation](https://www.postman.com/mathongo-backend-assignment/workspace/mathongo-backend-assignment/collection/27685742-a7c8c3d3-b994-42bd-8848-c7294fa9cebe?action=share&creator=27685742)
+
+## Security Features
+
+- JWT authentication
+- Rate limiting
+- Helmet security headers
+- CORS protection
+- Environment variables for sensitive data
+
+## Development
+
+The project uses nodemon for development, which automatically restarts the server when files change. TypeScript files are compiled on-the-fly using ts-node.
+
+## Building for Production
+
+The TypeScript code is compiled to JavaScript using the TypeScript compiler. The compiled code is output to the `dist` directory.
+
+To build the project:
+```bash
+npm run build
 ```
 
 ## Contributing

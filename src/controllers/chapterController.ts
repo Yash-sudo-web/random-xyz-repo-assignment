@@ -78,6 +78,12 @@ export const getChapters = async (req: Request, res: Response) => {
  */
 export const getChapter = async (req: Request, res: Response) => {
   try {
+    if (req.params.id.length !== 24) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid chapter ID format'
+      });
+    }
     const chapter = await Chapter.findById(req.params.id);
     if (!chapter) {
       return res.status(404).json({
